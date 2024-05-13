@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/static/styles/styles.css">
+    <title>COGNITO Login Page</title>
+
+</head>
+
+<body>
+
+    <div class="container" id="container">
+        
+        <div class="form-container sign-in">
+            <form>
+                <h1>Log In</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                </div>
+                <span>or use your email for Login</span>
+                
+                <input type="email" placeholder="Email" id="email" required>
+                <input type="password" placeholder="Password" id="password">
+                
+                <input class="login" type="submit" value="submit" class="sub" id="login">
+            </form>
+        </div>
+                <div class="toggle-panel toggle-right">
+                    <img src="/static/Files/Resources/loginimage.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+
+
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvqZ4Tf8761MMzZRhqYFmXChv1cXQ43Qw",
+            authDomain: "face-recognition-attenda-c350a.firebaseapp.com",
+            projectId: "face-recognition-attenda-c350a",
+            storageBucket: "face-recognition-attenda-c350a.appspot.com",
+            messagingSenderId: "136690237326",
+            appId: "1:136690237326:web:c84c07436d46b743f36edf",
+            measurementId: "G-ZSKZL79SNK"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth();
+
+
+        login.addEventListener("click", (e) => {
+            event.preventDefault()
+
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed up 
+                    const user = userCredential.user;
+                    alert('user logged in ')
+                    window.location.href= "/admin"
+            // ...
+                })
+
+                    
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // ..
+
+                    alert(errorMessage)
+                });
+            
+        })
+
+
+
+    </script>
+</body>
+
+</html>
